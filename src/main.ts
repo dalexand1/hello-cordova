@@ -3,6 +3,10 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import * as FastClick from 'fastclick';
+
+// attach FastClick.js
+FastClick.attach(document.body);
 
 if (environment.production) {
   enableProdMode();

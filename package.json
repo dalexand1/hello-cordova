@@ -4,10 +4,16 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href=/",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "clean": "rm -rf dist cordova/www/* && touch cordova/www/.gitkeep",
+    "build:cordova": "npm run clean && ng build --base-href=. --output-path=cordova/www",
+    "cordova:prepare": "cd cordova && rm -rf platforms plugins node_modules && npm ci && cordova prepare && cd ..",
+    "cordova:build:ios": "npm run build:cordova && cd cordova && cordova build ios && cd ..",
+    "cordova:emulate:ios": "npm run cordova:build:ios && cd cordova && cordova emulate ios && cd ..",
+    "open:xcode": "open $(find ./cordova/platforms/ios -name '*.xcworkspace')"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +27,7 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "core-js": "^2.5.4",
+    "fastclick": "^1.0.6",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },
