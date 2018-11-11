@@ -1,5 +1,7 @@
-Angular6 + Cordova SAML Authentication Example
+Angular6 + Cordova inAppBrowser SAML Authentication Example
+===========================================================
 
+```
 cd hello-cordova
 npm install
 cd cordova
@@ -9,6 +11,7 @@ cd ..
 ng build --prod --base-href . --output-path .\cordova\www
 cd cordova
 cordova build android
+```
 
 If cordova.js is not referenced in the cordova\wwww\index.html, you will need to add <script src="cordova.js"></script>, otherwise the Angular app will not bootstrap Cordova.
 
