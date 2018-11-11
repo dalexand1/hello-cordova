@@ -1,27 +1,19 @@
-# HelloCordova
+Angular6 + Cordova SAML Authentication Example
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+cd hello-cordova
+npm install
+cd cordova
+cordova platform add android
+cordova plugin add cordova-plugin-inappbrowser
+cd ..
+ng build --prod --base-href . --output-path .\cordova\www
+cd cordova
+cordova build android
 
-## Development server
+If cordova.js is not referenced in the cordova\wwww\index.html, you will need to add <script src="cordova.js"></script>, otherwise the Angular app will not bootstrap Cordova.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The Cordova App is only intended to work in an emulator and has only been tested on Android.
 
-## Code scaffolding
+An external SAML Service Provider is required.  In this demo, the SAML Service Provider has been customized to package the SAML attributes in a JSON Web Token that is tacked on to the location as a parameter.  The Cordova inAppBrowser checks for the JWT to signal a successful login to the Service Provider.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+If the SAML SP or IdP is using self-signed SSL certs, then you need to modify the inAppBrowser java code (see http://ivancevich.me/articles/ignoring-invalid-ssl-certificates-on-cordova-android-ios/).
